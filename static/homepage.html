@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+        <title>Some HTML in here</title>
+    </head>
+    <body>
+        <h2>Add your to do items</h2>
+        <div>
+           <form hx-post="/todo/" hx-ext='json-enc' hx-swap="innerHTML" hx-target="#todo_list_items">
+            <label for="itemname">Item name:</label><br>
+            <input type="text" id="itemname" name="name"><br>
+            <label for="itemdesc">Desciption:</label><br>
+            <input type="text" id="itemdesc" name="description">
+            <input type="submit" value="Submit">
+           </form>
+        </div>
+        <div id="todo_list_items" class="relative overflow-x-auto shadow-md sm:rounded-lg"></div>
+    </body>
+</html>

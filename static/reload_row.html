@@ -1,0 +1,15 @@
+<div>
+    <td class="w-5 p-3">{{id}}</td>
+    <td class="w-5 p-3">{{todo_item.name}}</td>
+    <td class="w-5 p-3">{{todo_item.description}}</td>
+    <td>
+        <button type="button" 
+            hx-target="#todo-{{id}}" 
+            hx-swap = "innerHTML"
+            hx-get="/todo/edit/{{id}}/"
+            hx-include="#todo-{{id}}">
+            Edit
+        </button>
+        <button type="button">Delete</button>
+    </td>
+</div>

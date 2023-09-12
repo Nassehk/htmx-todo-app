@@ -1,0 +1,16 @@
+<div id="editable_todo_{{id}}">
+    <td class="w-5 p-3">{{id}}</td>
+    <td class="w-5 p-3"><input type="text" name="name" value="{{todo_item.name}}"/></td>
+    <td class="w-5 p-3"><input type="text" name="description" value="{{todo_item.description}}"/></td>
+    <td>
+        <button type="button" 
+            hx-target="#editable_todo_{{id}}" 
+            hx-swap = "outerHTML"
+            hx-put="/todo/edit/{{id}}/"
+            hx-ext='json-enc'
+            hx-include="[id='editable_todo_{{id}}']">
+            Save
+        </button>
+        <button type="button">Discard!</button>
+    </td>
+</div>

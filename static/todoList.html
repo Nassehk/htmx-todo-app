@@ -1,0 +1,31 @@
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th>ID</th>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for id, item in todo_list.items() %}
+            <tr id="todo-{{id}}">
+                <div>
+                    <td class="w-5 p-3">{{id}}</td>
+                    <td class="w-5 p-3">{{item.name}}</td>
+                    <td class="w-5 p-3">{{item.description}}</td>
+                    <td>
+                        <button type="button" 
+                            hx-target="#todo-{{id}}" 
+                            hx-swap = "innerHTML"
+                            hx-get="/todo/edit/{{id}}/"
+                            hx-include="#todo-{{id}}">
+                            Edit
+                        </button>
+                        <button type="button">Delete</button>
+                    </td>
+                </div>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table> 
