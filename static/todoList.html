@@ -1,7 +1,7 @@
 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
-        <th>ID</th>
+        <th style="display: none">ID</th>
         <th>Item</th>
         <th>Description</th>
         <th>Modify</th>
@@ -10,21 +10,25 @@
     <tbody>
         {% for id, item in todo_list.items() %}
             <tr id="todo-{{id}}">
-                <div>
-                    <td class="w-5 p-3">{{id}}</td>
+                    <td class="w-5 p-3" style="display: none">{{id}}</td>
                     <td class="w-5 p-3">{{item.name}}</td>
                     <td class="w-5 p-3">{{item.description}}</td>
                     <td>
-                        <button type="button" 
+                        <button type="btn" 
                             hx-target="#todo-{{id}}" 
-                            hx-swap = "innerHTML"
+                            hx-swap = "outerHTML"
                             hx-get="/todo/edit/{{id}}/"
                             hx-include="#todo-{{id}}">
                             Edit
                         </button>
-                        <button type="button">Delete</button>
+                        <button type="button"
+                            hx-target="#todo-{{id}}" 
+                            hx-swap = "delete"
+                            hx-delete="/todo/edit/{{id}}/"
+                            hx-include="#todo-{{id}}">
+                            Delete
+                        </button>
                     </td>
-                </div>
             </tr>
         {% endfor %}
     </tbody>

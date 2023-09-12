@@ -36,16 +36,24 @@ def return_all():
     return list(todo_list.values())
 
 @app.get("/todo/edit/{todo_id}/")
-def edit_todo_item(request: Request, todo_id:str):
-    return templates.TemplateResponse("edit-row.html", context = {"request": request,"id":todo_id, "todo_item":todo_list[int(todo_id)]})
+def edit_todo_item(request: Request, todo_id:int):
+    return templates.TemplateResponse("edit-row.html", context = {"request": request,"id":todo_id, "todo_item":todo_list[todo_id]})
 
 @app.put("/todo/edit/{todo_id}/")
-async def save_edited_todo_item(request: Request, todo_id:str):
+async def save_edited_todo_item(request: Request, todo_id:int):
     body = await request.json()
-    print(body)
-    todo_list[int(todo_id)] = Item(**body)
-    return templates.TemplateResponse("reload_row.html", context = {"request": request,"id":todo_id, "todo_item":todo_list[int(todo_id)]})
+    todo_list[todo_id] = Item(**body)
+    return templates.TemplateResponse("reload_row.html", context = {"request": request,"id":todo_id, "todo_item":todo_list[todo_id]})
 
+@app.post("/todo/discard_edit/{todo_id}/")
+async def discard_edit(request: Request, todo_id:int):
+    return templates.TemplateResponse("reload_row.html", context = {"request": request,"id":todo_id, "todo_item":todo_list[todo_id]})
+
+@app.delete("/todo/edit/{todo_id}/")
+async def delete(request: Request, todo_id:int):
+    global todo_list
+    todo_list.pop(todo_id)
+    return
 
 @app.get("/", response_class=HTMLResponse)
 async def homepage():
